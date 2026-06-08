@@ -155,6 +155,4 @@ O aplicativo móvel consome a API RESTful segura e deve ser inicializado a parti
 
 ## 📺 Vídeo de Apresentação
 
-Confira a demonstração completa da API, fluxo de tokens OAuth2 e uso do aplicativo móvel no link abaixo:
-
-* [Assista ao Vídeo de Apresentação do Trabalho](video/2026-06-08 10-43-32.mp4)
+* O video de apresentação se encontra na pasta video do repositório: video/2026-06-08 10-43-32.mp4
