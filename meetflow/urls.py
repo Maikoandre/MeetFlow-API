@@ -12,6 +12,7 @@ router.register(r'relatorios', RelatorioViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2')),
     path('', include('events.urls')),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
