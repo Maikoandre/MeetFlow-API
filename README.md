@@ -1,137 +1,133 @@
-# MeetFlow - Sistema de Gestão de Eventos
+# MeetFlow - Sistema de Gestão de Eventos (API RESTful Segura) 🔒
 
-Este projeto é o Trabalho Final da disciplina de **Programação para Web I** do curso de Análise e Desenvolvimento de Sistemas (4º Período), ministrada pelo Professor Carlos Anderson.
+Este repositório contém o **Trabalho Final** da disciplina de **Programação para Web I** do curso de Análise e Desenvolvimento de Sistemas (4º Período).
 
-O sistema foi desenvolvido utilizando **Django** e **Bootstrap**, focando na implementação de autenticação, permissões e operações CRUD completas utilizando exclusivamente **Function-Based Views (FBV)**.
-
-<img src="static/src/assets/images/meetflow.png" alt="MeetFlow Logo">
-
-## 🎯 Objetivo
-
-Desenvolver uma aplicação web para o gerenciamento completo do ciclo de vida de eventos, permitindo o cadastro de usuários, criação de eventos, gestão de inscrições, controle de presença e geração de relatórios.
-
-## 🚀 Funcionalidades (CRUDs)
-
-O sistema conta com 5 funcionalidades completas (Listagem, Criação, Edição, Exclusão e Detalhe):
-
-1.  **Gestão de Eventos:** Criação, aprovação, publicação e gerenciamento de eventos.
-2.  **Gestão de Usuários:** Cadastro, edição de perfil e controle de tipos (Administrador, Organizador, Participante).
-3.  **Inscrições:** Sistema de inscrição em eventos com status (Pendente, Confirmado, Cancelado).
-4.  **Controle de Presença:** Registro de presença dos participantes inscritos.
-5.  **Relatórios:** Geração e visualização de métricas dos eventos (total de inscritos e presentes).
-
-Além disso, o sistema possui:
-
-- Sistema de Autenticação (Login/Logout/Cadastro).
-- Controle de acesso baseado em permissões e grupos.
-
-## 🛠️ Tecnologias Utilizadas
-
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-
-## ⚙️ Instruções de Execução
-
-### 🐳 Execução com Docker (Recomendado)
-
-A maneira mais fácil de rodar o projeto é utilizando Docker. Certifique-se de ter o **Docker** e o **Docker Compose** instalados.
-
-1.  **Clone o repositório:**
-
-    ```bash
-    git clone https://github.com/Maikoandre/MeetFlow.git
-    cd MeetFlow
-    ```
-
-2.  **Suba os containers:**
-
-    ```bash
-    docker compose up --build
-    ```
-
-    _Isso irá construir a imagem, iniciar o banco de dados MySQL e o servidor Django._
-
-3.  **Acesse no navegador:**
-    - Sistema: `http://localhost:8000/`
-    - Admin: `http://localhost:8000/admin/`
+O objetivo do projeto é o desenvolvimento de uma aplicação **API RESTful completa e segura utilizando o Django REST Framework (DRF)** com autenticação e autorização providas pelo **Django OAuth Toolkit (DOT)**, integrada a um cliente móvel construído em **Flutter**.
 
 ---
 
-### 🔧 Execução Manual
+## 🎯 Requisitos e Funcionalidades
 
-Caso prefira rodar sem Docker, você precisará de uma instância **MySQL** rodando localmente.
+O sistema conta com a implementação completa dos seguintes requisitos:
 
-1.  **Clone o repositório:**
+1. **API RESTful (Django/DRF)**:
+   - Autenticação e autorização via protocolo **OAuth2 (Bearer Token)** usando o Django OAuth Toolkit.
+   - Banco de dados composto por **5 modelos relacionados**: `Usuario`, `Evento`, `Inscricao`, `Presenca` e `Relatorio`.
+   - **CRUD completo** para recursos principais da aplicação (com destaque para o CRUD completo de inscrições a partir do cliente).
+   - Uso apropriado de Serializers e ViewSets.
 
-    ```bash
-    git clone https://github.com/Maikoandre/MeetFlow.git
-    cd MeetFlow
-    ```
+2. **Cliente Móvel (Flutter)**:
+   - Desenvolvido em tecnologia não-Django ([meetflow_app](file:///home/maiko/Projects/MeetFlow-Fork/meetflow_app)).
+   - Implementa fluxo de Login solicitando tokens via requisição POST ao DOT (`/o/token/`).
+   - Persistência criptografada dos tokens no dispositivo e renovação automática de sessão (*Refresh Token*) via interceptores.
+   - Interface funcional e responsiva para listagem de eventos (com paginação/infinite scroll), visualização de detalhes, realização de inscrições e cancelamentos.
 
-2.  **Crie e ative um ambiente virtual:**
+---
 
-    ```bash
-    # Windows
-    python -m venv venv
-    venv\Scripts\activate
+## 🛠️ Tecnologias Utilizadas
 
-    # Linux/Mac
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+- **Backend**: Python, Django, Django REST Framework, Django OAuth Toolkit, PyMySQL.
+- **Banco de Dados**: MySQL (produção/desenvolvimento), SQLite (testes automatizados).
+- **Cliente**: Dart, Flutter, Dio, Provider, Flutter Secure Storage.
+- **Containerização**: Docker e Docker Compose.
 
-3.  **Instale as dependências:**
+---
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+## ⚙️ Instruções de Execução
 
-4.  **Configure o Banco de Dados:**
-    Certifique-se de ter um banco MySQL criado e exporte as variáveis de ambiente ou ajuste o `settings.py` se necessário.
-    Exemplo de variáveis (Linux/Mac):
+### 🐳 A. Execução com Docker (Recomendado)
 
-    ```bash
-    export DB_NAME=meetflow_db
-    export DB_USER=seu_usuario
-    export DB_PASSWORD=sua_senha
-    export DB_HOST=localhost
-    ```
+O Docker Compose inicializa automaticamente os containers da API Django e do Banco de Dados MySQL com todas as migrações aplicadas.
 
-5.  **Realize as migrações:**
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/Maikoandre/MeetFlow.git
+   cd MeetFlow
+   ```
 
-    ```bash
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
+2. **Suba os containers:**
+   ```bash
+   docker compose up --build
+   ```
 
-6.  **Crie um superusuário (Admin):**
+3. **Configure a Aplicação OAuth (Importante!)**
+   Em um novo terminal, com os containers rodando, execute o comando para registrar automaticamente a aplicação do aplicativo móvel:
+   ```bash
+   docker compose exec web python manage.py setup_oauth
+   ```
 
-    ```bash
-    python manage.py createsuperuser
-    ```
+4. **Popule o Banco de Dados com Dados de Teste (Opcional):**
+   ```bash
+   docker compose exec web python manage.py populate_db
+   ```
+   *Isso criará o superusuário `admin` com a senha `password123`, 5 organizadores (`org1` a `org5`), 20 participantes (`user1` a `user20`), eventos e inscrições.*
 
-7.  **Inicie o servidor:**
-    ```bash
-    python manage.py runserver
-    ```
+---
+
+### 🔧 B. Execução Manual (Local)
+
+Caso prefira rodar sem Docker, siga os passos abaixo. Certifique-se de ter uma instância **MySQL** rodando localmente.
+
+1. **Crie e ative o ambiente virtual (venv):**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # No Windows: .venv\Scripts\activate
+   ```
+
+2. **Instale as dependências (usando uv ou pip):**
+   ```bash
+   uv pip install -r requirements.txt
+   # Ou usando pip padrão:
+   pip install -r requirements.txt
+   ```
+
+3. **Configure as Variáveis de Ambiente do Banco de Dados:**
+   ```bash
+   export DB_NAME=meetflow_db
+   export DB_USER=seu_usuario
+   export DB_PASSWORD=sua_senha
+   export DB_HOST=localhost
+   ```
+
+4. **Rode as Migrações da API e do DOT:**
+   ```bash
+   python manage.py migrate
+   ```
+
+5. **Crie o Superusuário (Admin) e Popule o Banco:**
+   ```bash
+   python manage.py createsuperuser
+   python manage.py populate_db
+   ```
+
+6. **Configure a Aplicação OAuth:**
+   ```bash
+   python manage.py setup_oauth
+   ```
+
+7. **Inicie o Servidor:**
+   ```bash
+   python manage.py runserver
+   ```
+
+---
+
+## 📂 Estrutura do Repositório
+
+- **`/` (Raiz)**: Contém o código-fonte da API Django (`meetflow/`), app Django (`events/`), Dockerfiles e arquivos de gerenciamento de pacotes do backend.
+- **`/meetflow_app` (Cliente)**: Contém o aplicativo móvel desenvolvido em Flutter.
+
+---
 
 ## 👥 Integrantes do Grupo
 
 - Maiko André Antunes de Sousa - 20241GBI02GT0010
 - Adalvan Lima dos Anjos - 20241GBI02GT0005
 
-## 📺 Vídeo de Apresentação
-
-Confira a demonstração do funcionamento do sistema no link abaixo:
-
-[Assista ao Vídeo de Apresentação](https://www.youtube.com/watch?v=7S-sA_IdfNk)
-
 ---
 
-_Projeto desenvolvido para fins acadêmicos._
+## 📺 Vídeo de Apresentação
+
+Confira a demonstração completa da API, fluxo de tokens OAuth2 e uso do aplicativo móvel no link abaixo:
+
+* [Assista ao Vídeo de Apresentação do Trabalho](https://www.youtube.com/watch?v=7S-sA_IdfNk)
