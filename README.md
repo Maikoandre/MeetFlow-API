@@ -1,6 +1,6 @@
 # MeetFlow - Sistema de Gestão de Eventos (API RESTful Segura) 🔒
 
-Este repositório contém o **Trabalho Final** da disciplina de **Programação para Web I** do curso de Análise e Desenvolvimento de Sistemas (4º Período).
+Este repositório contém o **Trabalho Final** da disciplina de **Programação para Web II** do curso de Análise e Desenvolvimento de Sistemas.
 
 O objetivo do projeto é o desenvolvimento de uma aplicação **API RESTful completa e segura utilizando o Django REST Framework (DRF)** com autenticação e autorização providas pelo **Django OAuth Toolkit (DOT)**, integrada a um cliente móvel construído em **Flutter**.
 
@@ -119,10 +119,9 @@ Caso prefira rodar sem Docker, siga os passos abaixo. Certifique-se de ter uma i
 
 ---
 
-## 👥 Integrantes do Grupo
+## 👥 Integrantes
 
 - Maiko André Antunes de Sousa - 20241GBI02GT0010
-- Adalvan Lima dos Anjos - 20241GBI02GT0005
 
 ---
 
