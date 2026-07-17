@@ -17,7 +17,7 @@ O sistema conta com a implementação completa dos seguintes requisitos:
    - Uso apropriado de Serializers e ViewSets.
 
 2. **Cliente Móvel (Flutter)**:
-   - Desenvolvido em tecnologia não-Django ([client](file:///home/maiko/Projects/MeetFlow-Fork/client)).
+   - Desenvolvido em tecnologia não-Django ([client](file:///home/maiko/Desktop/Projects/MeetFlow-API/client)).
    - Implementa fluxo de Login solicitando tokens via requisição POST ao DOT (`/o/token/`).
    - Persistência criptografada dos tokens no dispositivo e renovação automática de sessão (*Refresh Token*) via interceptores.
    - Interface funcional e responsiva para listagem de eventos (com paginação/infinite scroll), visualização de detalhes, realização de inscrições e cancelamentos.
@@ -74,8 +74,9 @@ Caso prefira rodar sem Docker, siga os passos abaixo. Certifique-se de ter uma i
    source .venv/bin/activate  # No Windows: .venv\Scripts\activate
    ```
 
-2. **Instale as dependências (usando uv ou pip):**
+2. **Acesse o diretório do backend e instale as dependências (usando uv ou pip):**
    ```bash
+   cd api
    uv pip install -r requirements.txt
    # Ou usando pip padrão:
    pip install -r requirements.txt
@@ -144,6 +145,66 @@ O aplicativo móvel consome a API RESTful segura e deve ser inicializado a parti
 
 - **`/api` (Backend)**: Contém o código-fonte da API Django (`meetflow/`), app Django (`events/`), Dockerfile e arquivos de gerenciamento de pacotes do backend.
 - **`/client` (Cliente)**: Contém o aplicativo móvel desenvolvido em Flutter.
+
+---
+
+## 📊 Diagrama de Classes da API (Modelos Django)
+
+O diagrama abaixo representa a modelagem de dados da API Django do **MeetFlow**:
+
+```mermaid
+classDiagram
+    direction LR
+    class User {
+        +username: String
+        +email: String
+        +is_superuser: Boolean
+        +is_staff: Boolean
+    }
+
+    class Usuario {
+        +user: User
+        +nome: String
+        +idade: Integer
+        +tipo: String
+    }
+
+    class Evento {
+        +titulo: String
+        +descricao: String
+        +data: Date
+        +local: String
+        +organizador: User
+        +aprovado: Boolean
+        +publicado: Boolean
+    }
+
+    class Inscricao {
+        +evento: Evento
+        +participante: User
+        +status: String
+    }
+
+    class Presenca {
+        +inscricao: Inscricao
+        +presente: Boolean
+    }
+
+    class Relatorio {
+        +evento: Evento
+        +total_inscritos: Integer
+        +total_presentes: Integer
+        +data_geracao: DateTime
+        +get_adesao() int
+    }
+
+    Usuario "1" -- "1" User : user (OneToOneField)
+    Evento "0..*" --> "1" User : organizador (ForeignKey)
+    Inscricao "0..*" --> "1" Evento : evento (ForeignKey)
+    Inscricao "0..*" --> "1" User : participante (ForeignKey)
+    Presenca "1" -- "1" Inscricao : inscricao (OneToOneField)
+    Relatorio "0..*" --> "1" Evento : evento (ForeignKey)
+```
 
 ---
 
