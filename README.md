@@ -260,13 +260,16 @@ erDiagram
 O diagrama abaixo ilustra as interações dos diferentes atores (**Administrador**, **Organizador**, **Participante** e **Usuário Anônimo**) com o sistema:
 
 ```mermaid
-graph TD
-    %% Actors
-    Admin["  O  <br/> /|\ <br/> / \ <br/>Administrador"]
-    Org["  O  <br/> /|\ <br/> / \ <br/>Organizador"]
-    Part["  O  <br/> /|\ <br/> / \ <br/>Participante"]
+graph LR
+    %% Actors (Stacked Vertically on the Left)
     Anon["  O  <br/> /|\ <br/> / \ <br/>Usuário Anônimo"]
+    Part["  O  <br/> /|\ <br/> / \ <br/>Participante"]
+    Org["  O  <br/> /|\ <br/> / \ <br/>Organizador"]
+    Admin["  O  <br/> /|\ <br/> / \ <br/>Administrador"]
 
+    Anon ~~~ Part
+    Part ~~~ Org
+    Org ~~~ Admin
 
     %% Use Cases Grouped by Role
     subgraph Geral [Ações Públicas]
@@ -297,7 +300,12 @@ graph TD
         UC_GerirUsuarios(Gerenciar Usuários)
     end
 
-    %% Relations
+    %% Vertical Stacking of Subgraphs (via invisible links)
+    UC_VerEventos ~~~ UC_VerDetalhes
+    UC_VerDetalhes ~~~ UC_CriarEvento
+    UC_CriarEvento ~~~ UC_AprovarEvento
+
+    %% Relations (Left to Right)
     Anon --> UC_VerEventos
     Anon --> UC_Cadastrar
 
