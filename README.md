@@ -262,10 +262,11 @@ O diagrama abaixo ilustra as interações dos diferentes atores (**Administrador
 ```mermaid
 graph TD
     %% Actors
-    Admin((Administrador))
-    Org((Organizador))
-    Part((Participante))
-    Anon((Usuário Anônimo))
+    Admin["  O  <br/> /|\ <br/> / \ <br/>Administrador"]
+    Org["  O  <br/> /|\ <br/> / \ <br/>Organizador"]
+    Part["  O  <br/> /|\ <br/> / \ <br/>Participante"]
+    Anon["  O  <br/> /|\ <br/> / \ <br/>Usuário Anônimo"]
+
 
     %% Use Cases Grouped by Role
     subgraph Geral [Ações Públicas]
